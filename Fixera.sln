@@ -1,0 +1,43 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28714.193
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "etc", "etc", "{FB0F8E3F-EDDD-4502-AE01-9C6F17200915}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+		.gitignore = .gitignore
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fixera", "Fixera\Fixera.csproj", "{92D9E2E9-97DE-4D67-A28C-DD17D5E4F3EE}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fixera.NSubstitute", "Fixera.NSubstitute\Fixera.NSubstitute.csproj", "{2DFFB049-1D39-483E-8C4F-094BEB949588}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fixera.Tests", "Fixera.Tests\Fixera.Tests.csproj", "{6A1E136E-41AE-45FA-A8C0-2BE6E18EAF62}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{92D9E2E9-97DE-4D67-A28C-DD17D5E4F3EE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{92D9E2E9-97DE-4D67-A28C-DD17D5E4F3EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{92D9E2E9-97DE-4D67-A28C-DD17D5E4F3EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{92D9E2E9-97DE-4D67-A28C-DD17D5E4F3EE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2DFFB049-1D39-483E-8C4F-094BEB949588}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2DFFB049-1D39-483E-8C4F-094BEB949588}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2DFFB049-1D39-483E-8C4F-094BEB949588}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2DFFB049-1D39-483E-8C4F-094BEB949588}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6A1E136E-41AE-45FA-A8C0-2BE6E18EAF62}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6A1E136E-41AE-45FA-A8C0-2BE6E18EAF62}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6A1E136E-41AE-45FA-A8C0-2BE6E18EAF62}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6A1E136E-41AE-45FA-A8C0-2BE6E18EAF62}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0AEFEB25-89D9-4FFF-A5AF-2AE293DCB405}
+	EndGlobalSection
+EndGlobal
