@@ -1,22 +1,23 @@
+using FluentAssertions;
 using NSubstitute;
-using Shouldly;
-using Xunit;
+using NUnit.Framework;
 
 namespace Fixera.Tests
 {
+    [TestFixture]
     public class DefaultFakeProviderTests
     {
-        public DefaultFakeProviderTests()
+        [SetUp]
+        public void SetUp()
         {
             _fakeFactory = Substitute.For<IFakeFactory>();
-
             _sut = new DefaultFakeProvider(_fakeFactory);
         }
 
-        private readonly IFakeFactory _fakeFactory;
-        private readonly DefaultFakeProvider _sut;
+        private IFakeFactory _fakeFactory = default!;
+        private DefaultFakeProvider _sut = default!;
 
-        [Fact]
+        [Test]
         public void GetTransient_returns_new_fake_each_time()
         {
             var expected1 = Substitute.For<ISomeInterface>();
@@ -27,12 +28,12 @@ namespace Fixera.Tests
             var actual1 = _sut.GetTransient<ISomeInterface>();
             var actual2 = _sut.GetTransient<ISomeInterface>();
 
-            actual1.ShouldNotBeSameAs(actual2);
-            actual1.ShouldBeSameAs(expected1);
-            actual2.ShouldBeSameAs(expected2);
+            actual1.Should().NotBeSameAs(actual2);
+            actual1.Should().BeSameAs(expected1);
+            actual2.Should().BeSameAs(expected2);
         }
 
-        [Fact]
+        [Test]
         public void GetSingleton_returns_same_fake_every_time()
         {
             var expected = Substitute.For<ISomeInterface>();
@@ -42,37 +43,37 @@ namespace Fixera.Tests
             var actual1 = _sut.GetSingleton<ISomeInterface>();
             var actual2 = _sut.GetSingleton<ISomeInterface>();
 
-            actual1.ShouldBeSameAs(expected);
-            actual1.ShouldBeSameAs(actual2);
+            actual1.Should().BeSameAs(expected);
+            actual1.Should().BeSameAs(actual2);
             _fakeFactory.Received(1).Create<ISomeInterface>();
         }
 
-        [Fact]
+        [Test]
         public void TryAdd_sets_the_singleton()
         {
             var expected = Substitute.For<ISomeInterface>();
 
-            _sut.TryAddSingleton(expected).ShouldBeTrue();
-            _sut.GetSingleton<ISomeInterface>().ShouldBeSameAs(expected);
+            _sut.TryAddSingleton(expected).Should().BeTrue();
+            _sut.GetSingleton<ISomeInterface>().Should().BeSameAs(expected);
             _fakeFactory.DidNotReceive().Create<ISomeInterface>();
         }
 
-        [Fact]
+        [Test]
         public void TryAdd_does_not_overwrite_auto_created()
         {
             var autoCreated = Substitute.For<ISomeInterface>();
             _fakeFactory.Create<ISomeInterface>().Returns(autoCreated);
 
-            _sut.GetSingleton<ISomeInterface>().ShouldBeSameAs(autoCreated);
+            _sut.GetSingleton<ISomeInterface>().Should().BeSameAs(autoCreated);
 
             var later = Substitute.For<ISomeInterface>();
 
-            _sut.TryAddSingleton(later).ShouldBeFalse();
-            _sut.GetSingleton<ISomeInterface>().ShouldBeSameAs(autoCreated);
+            _sut.TryAddSingleton(later).Should().BeFalse();
+            _sut.GetSingleton<ISomeInterface>().Should().BeSameAs(autoCreated);
             _fakeFactory.Received(1).Create<ISomeInterface>();
         }
 
-        [Fact]
+        [Test]
         public void TryAdd_does_not_overwrite_previously_added()
         {
             var previous = Substitute.For<ISomeInterface>();
@@ -80,8 +81,8 @@ namespace Fixera.Tests
 
             var later = Substitute.For<ISomeInterface>();
 
-            _sut.TryAddSingleton(later).ShouldBeFalse();
-            _sut.GetSingleton<ISomeInterface>().ShouldBeSameAs(previous);
+            _sut.TryAddSingleton(later).Should().BeFalse();
+            _sut.GetSingleton<ISomeInterface>().Should().BeSameAs(previous);
             _fakeFactory.Received(0).Create<ISomeInterface>();
         }
     }

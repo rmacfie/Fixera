@@ -1,19 +1,21 @@
+using FluentAssertions;
 using NSubstitute;
-using Shouldly;
-using Xunit;
+using NUnit.Framework;
 
 namespace Fixera.Tests
 {
+    [TestFixture]
     public class DefaultSubjectFactoryTests
     {
-        public DefaultSubjectFactoryTests()
+        [SetUp]
+        public void SetUp()
         {
             _fakeProvider = Substitute.For<IFakeProvider>();
         }
 
-        private readonly IFakeProvider _fakeProvider;
+        private IFakeProvider _fakeProvider = default!;
 
-        [Fact]
+        [Test]
         public void It_creates_type_with_dependencies_and_defaults()
         {
             var dependency1 = Substitute.For<IDependency1>();
@@ -26,21 +28,21 @@ namespace Fixera.Tests
 
             var created = sut.Create();
 
-            created.ShouldNotBeNull();
-            created.Dependency1.ShouldBeSameAs(dependency1);
-            created.Dependency2.ShouldBeSameAs(dependency2);
-            created.Dependency3.ShouldBe(SomeClassWithDependencies.DefaultDependency3);
-            created.Dependency4.ShouldBe(SomeClassWithDependencies.DefaultDependency4);
+            created.Should().NotBeNull();
+            created.Dependency1.Should().BeSameAs(dependency1);
+            created.Dependency2.Should().BeSameAs(dependency2);
+            created.Dependency3.Should().Be(SomeClassWithDependencies.DefaultDependency3);
+            created.Dependency4.Should().Be(SomeClassWithDependencies.DefaultDependency4);
         }
 
-        [Fact]
+        [Test]
         public void It_creates_type_without_dependencies()
         {
             var sut = new DefaultSubjectFactory<SomeClassWithoutDependencies>(_fakeProvider);
 
             var created = sut.Create();
 
-            created.ShouldNotBeNull();
+            created.Should().NotBeNull();
         }
     }
 }
