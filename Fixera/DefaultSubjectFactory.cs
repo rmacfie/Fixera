@@ -31,17 +31,14 @@ namespace Fixera
                 .FirstOrDefault();
 
             if (constructor == null)
-                throw new InvalidOperationException($"Could not find any public contructor on subject type {type.FullName}");
+                throw new InvalidOperationException($"Could not find any public constructor on subject type {type.FullName}");
 
             return constructor;
         }
 
         private IEnumerable<object> CreateArguments(ConstructorInfo constructor)
         {
-            foreach (var parameter in constructor.GetParameters())
-            {
-                yield return CreateArgument(parameter);
-            }
+            return constructor.GetParameters().Select(CreateArgument);
         }
 
         private object CreateArgument(ParameterInfo parameter)

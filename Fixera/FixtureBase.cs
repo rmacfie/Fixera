@@ -7,19 +7,23 @@ namespace Fixera
     {
         public readonly ISubjectProvider<TSubject> SubjectProvider;
 
-        protected FixtureBase(IFakeFactory fakeFactory) : this(new DefaultFakeProvider(fakeFactory))
+        protected FixtureBase(IFakeFactory fakeFactory)
+            : this(new DefaultFakeProvider(fakeFactory))
         {
         }
 
-        protected FixtureBase(IFakeProvider fakeProvider) : this(fakeProvider, new DefaultSubjectFactory<TSubject>(fakeProvider))
+        protected FixtureBase(IFakeProvider fakeProvider)
+            : this(fakeProvider, new DefaultSubjectFactory<TSubject>(fakeProvider))
         {
         }
 
-        protected FixtureBase(IFakeProvider fakeProvider, ISubjectFactory<TSubject> subjectFactory) : this(fakeProvider, new DefaultSubjectProvider<TSubject>(subjectFactory))
+        protected FixtureBase(IFakeProvider fakeProvider, ISubjectFactory<TSubject> subjectFactory)
+            : this(fakeProvider, new DefaultSubjectProvider<TSubject>(subjectFactory))
         {
         }
 
-        protected FixtureBase(IFakeProvider fakeProvider, ISubjectProvider<TSubject> subjectProvider) : base(fakeProvider)
+        protected FixtureBase(IFakeProvider fakeProvider, ISubjectProvider<TSubject> subjectProvider)
+            : base(fakeProvider)
         {
             SubjectProvider = subjectProvider;
         }
@@ -50,7 +54,8 @@ namespace Fixera
     {
         public readonly IFakeProvider FakeProvider;
 
-        protected FixtureBase(IFakeFactory fakeFactory) : this(new DefaultFakeProvider(fakeFactory))
+        protected FixtureBase(IFakeFactory fakeFactory)
+            : this(new DefaultFakeProvider(fakeFactory))
         {
         }
 

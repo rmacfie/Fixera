@@ -8,7 +8,7 @@ namespace Fixera
         private const int Key = 0;
 
         private readonly ISubjectFactory<T> _factory;
-        private readonly ConcurrentDictionary<int, T> _subjects = new ConcurrentDictionary<int, T>();
+        private readonly ConcurrentDictionary<int, T> _subjects = new();
 
         public DefaultSubjectProvider(ISubjectFactory<T> factory)
         {
@@ -17,7 +17,7 @@ namespace Fixera
 
         public T Get()
         {
-            return _subjects.GetOrAdd(Key, t => _factory.Create());
+            return _subjects.GetOrAdd(Key, _ => _factory.Create());
         }
 
         public bool TryAdd(T instance)
